@@ -6,6 +6,7 @@ from agent.xa_session import XASession_EventHandler
 class TestEBest(unittest.TestCase):
   def setUp(self):
     self.ebest = EBest('DEMO')
+    self.ebest.connect_server()
     self.ebest.login()
     
   def tearDown(self):
