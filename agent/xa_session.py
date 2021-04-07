@@ -1,5 +1,3 @@
-import threading
-
 class XASession_EventHandler:
   # Connect, Login, Logout 이벤트 핸들러
   login_state = 0

@@ -8,9 +8,15 @@ class TestEBest(unittest.TestCase):
     self.ebest = EBest('DEMO')
     self.ebest.connect_server()
     self.ebest.login()
-    
+
   def tearDown(self):
     self.ebest.logout()
     
+  @unittest.skip('login skip')
   def test_login(self):
-    print(inspect.stack()[0][3])
+    print('<' + inspect.stack()[0][3] + '>')
+    
+  def test_get_stock_list(self):
+    print('<' + inspect.stack()[0][3] + '>')
+    result = self.ebest.query_manager.get_stock_list(1)
+    print(result)

@@ -2,6 +2,7 @@ import win32com.client
 import pythoncom
 import json
 from agent.xa_session import XASession_EventHandler
+from agent.query_manager import QueryManager
 
 class EBest:
   def __init__(self, mode):
@@ -18,6 +19,8 @@ class EBest:
         self.cert_pd = _config['cert_pd']
         
       self.xa_session_inst = win32com.client.DispatchWithEvents("XA_Session.XASession", XASession_EventHandler)     
+      self.query_manager = QueryManager()
+      
     except Exception as err:
       print(">>> err: ", err)
       
@@ -26,7 +29,7 @@ class EBest:
     try:
       self.xa_session_inst.ConnectServer(self.host, self.port)
       if self.xa_session_inst.IsConnected():
-        print('connect server success')
+        print('>>> connect server success')
       else:
         raise Exception ('connect server fail')
     except Exception as err:
@@ -56,9 +59,8 @@ class EBest:
   def logout(self) :
     try:  
       self.xa_session_inst.DisconnectServer()
-      print('=' * 10)
-      print('server disconnected')
-      print('=' * 10)
+      print('>>> server disconnected')
       XASession_EventHandler.login_state = 0
     except Exception as err:
       print('>>> err: ', err)
+      
