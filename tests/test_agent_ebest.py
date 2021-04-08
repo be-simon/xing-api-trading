@@ -16,7 +16,13 @@ class TestEBest(unittest.TestCase):
   def test_login(self):
     print('<' + inspect.stack()[0][3] + '>')
     
+  @unittest.skip('get_stock_list skip')
   def test_get_stock_list(self):
     print('<' + inspect.stack()[0][3] + '>')
     result = self.ebest.query_manager.get_stock_list(1)
+    print(result)
+    
+  def test_get_stock_top_capital(self):
+    print('<' + inspect.stack()[0][3] + '>')
+    result = self.ebest.query_manager.get_stock_top_capital('001')
     print(result)
