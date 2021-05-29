@@ -16,6 +16,7 @@ class QueryManager:
     # outs(): OutBlock1의 유무 (default = '', 있으면 1)
     # return (list): 각 occur 마다의 결과를 list로 반환, 각 item은 dict type으로 되어있음 
   
+  
     # xa_query 객체 생성
     xa_query = win32com.client.DispatchWithEvents('XA_DataSet.XAQuery', XAQuery_EventHandler)
     xa_query.LoadFromResFile(XAQuery_EventHandler.RES_PATH + tr_number + '.res')
@@ -25,7 +26,7 @@ class QueryManager:
     # xa_query객체에 인블럭 데이터 세팅
     for key, value in inblock_data.items():
       xa_query.SetFieldData(inblock_name, key, 0, value)
-  
+    
   # xa_query를 이용해 쿼리 request
     result = xa_query.Request(0)
     while xa_query.tr_state == 0:
@@ -44,6 +45,12 @@ class QueryManager:
       result.append(item)
     
     return result
+  
+  # ----------
+  #
+  # TR Methods
+  #
+  # ----------
   
   def get_stock_list(self, market = 0):
     # 주식 종목 조회
@@ -70,4 +77,6 @@ class QueryManager:
     result = self._execute_query('t1444', inblock_data, outblock_fields, '1')
 
     return result
+
+  
 

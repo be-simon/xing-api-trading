@@ -3,6 +3,7 @@ import pythoncom
 import json
 from agent.xa_session import XASession_EventHandler
 from agent.query_manager import QueryManager
+from agent.real_manager import RealManager
 
 class EBest:
   def __init__(self, mode):
@@ -20,6 +21,7 @@ class EBest:
         
       self.xa_session_inst = win32com.client.DispatchWithEvents("XA_Session.XASession", XASession_EventHandler)     
       self.query_manager = QueryManager()
+      self.real_manager = RealManager()
       
     except Exception as err:
       print(">>> err: ", err)
