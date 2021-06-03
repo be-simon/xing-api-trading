@@ -1,6 +1,19 @@
+import pythoncom
+
 class XASession_EventHandler:
   # Connect, Login, Logout 이벤트 핸들러
+  server_res = 0
   login_state = 0
+
+  def clear_res(self):
+    XASession_EventHandler.server_res = 0
+
+  def _set_res(self):
+    XASession_EventHandler.server_res = 1
+  
+  def wait_res(self):
+    while XASession_EventHandler.server_res == 0:
+      pythoncom.PumpWaitingMessages()
 
   def OnLogin(self, code, msg):
     try:
@@ -11,6 +24,8 @@ class XASession_EventHandler:
     else:
       print('>>> login success')
       XASession_EventHandler.login_state = 1
+    finally:
+      self._set_res()
       
   def OnDisconnect(self):
     print('>>> server disconnected')

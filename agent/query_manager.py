@@ -28,9 +28,10 @@ class QueryManager:
       xa_query.SetFieldData(inblock_name, key, 0, value)
     
   # xa_query를 이용해 쿼리 request
+    xa_query.clear_res()
     result = xa_query.Request(0)
-    while xa_query.tr_state == 0:
-      pythoncom.PumpWaitingMessages()
+    xa_query.wait_res()
+    
     if result < 0:
       raise Exception('request err code: ', result)
     
@@ -78,5 +79,5 @@ class QueryManager:
 
     return result
 
-  
+
 

@@ -25,12 +25,13 @@ class TestEBest(unittest.TestCase):
     result = self.ebest.query_manager.get_stock_list(1)
     print(result)
     
-  @unittest.skip('get_stock_top_capital skip')
+  # @unittest.skip('get_stock_top_capital skip')
   def test_get_stock_top_capital(self):
     print('<' + inspect.stack()[0][3] + '>')
     result = self.ebest.query_manager.get_stock_top_capital('001')
     print(result)
     
+  @unittest.skip('get_real_news skip')
   def test_get_real_news(self):
     print('<' + inspect.stack()[0][3] + '>')
     result = self.ebest.real_manager.get_real_news()

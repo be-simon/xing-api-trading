@@ -38,12 +38,13 @@ class EBest:
       print('connect server err: ', err)
   
   
-  # login 실패시 while문을 어떻게 벗어날 것인가?
   def login(self):
     try:
+      self.xa_session_inst.clear_res()
       self.xa_session_inst.Login(self.user, self.pw, 0, 0, 0)
-      while XASession_EventHandler.login_state == 0:
-        pythoncom.PumpWaitingMessages()
+      self.xa_session_inst.wait_res()
+
+    
     except Exception as err:
       print('>>> login: ', err)
     
